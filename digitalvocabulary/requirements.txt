@@ -12,7 +12,21 @@ django==6.0.6
     #   djangorestframework
 djangorestframework==3.17.1
     # via -r requirements.in
+psycopg[binary,pool]==3.3.4
+    # via -r requirements.in
+psycopg-binary==3.3.4
+    # via psycopg
+psycopg-pool==3.3.1
+    # via psycopg
+python-dotenv==1.2.2
+    # via -r requirements.in
 sqlparse==0.5.5
     # via django
+typing-extensions==4.16.0
+    # via
+    #   psycopg
+    #   psycopg-pool
 tzdata==2026.2
-    # via django
+    # via
+    #   django
+    #   psycopg
