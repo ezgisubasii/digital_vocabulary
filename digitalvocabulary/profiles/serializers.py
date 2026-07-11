@@ -1,5 +1,5 @@
 from rest_framework import serializers, validators
-from profiles.models import CustomUser
+from profiles.models import CustomUser, Profile
 from django.contrib.auth.password_validation import validate_password
 
 
@@ -30,3 +30,9 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
         fields = ('id', 'username', 'email')
+
+class ProfileSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+    class Meta:
+        model = Profile
+        fields = ('id','user')
