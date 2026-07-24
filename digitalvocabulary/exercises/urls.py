@@ -1,6 +1,6 @@
 from django.urls import path
 from exercises.views import QuestionView
 
-urlpatterns = {
+urlpatterns = [
     path('question/', QuestionView.as_view(), name='create-question'),
-}
+]
