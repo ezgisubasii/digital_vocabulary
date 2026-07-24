@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 
     'profiles',
     'vocabularies',
+    'exercises',
 
     'rest_framework',
     'rest_framework_simplejwt',
