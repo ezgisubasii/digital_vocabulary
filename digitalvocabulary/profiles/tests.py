@@ -1,6 +1,15 @@
 from django.contrib.auth import get_user_model
+from django.test import SimpleTestCase
 from django.urls import reverse
 from rest_framework.test import APITestCase
+
+
+class URLResolutionTests(SimpleTestCase):
+    def test_named_urls_resolve(self):
+        self.assertEqual(reverse('register'), '/api/profiles/register/')
+        self.assertEqual(reverse('search-profile'), '/api/profiles/search/')
+        self.assertEqual(reverse('vocabularies'), '/api/vocabularies/')
+        self.assertEqual(reverse('create-question'), '/api/exercises/question/')
 
 
 class RegisterViewTests(APITestCase):
