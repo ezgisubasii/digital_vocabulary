@@ -20,4 +20,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/profiles/', include('profiles.urls')), # include the urls from the profiles app, update profiles
+    path('api/vocabularies/', include('vocabularies.urls')), # include the urls from the vocabularies app, update vocabularies
 ]

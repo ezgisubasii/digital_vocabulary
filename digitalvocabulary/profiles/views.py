@@ -5,7 +5,7 @@ from rest_framework import permissions
 from rest_framework.generics import ListAPIView
 from profiles.models import Profile, FollowRelation
 
-from django.shourtcuts import get_object_or_404
+from django.shortcuts import get_object_or_404
 from rest_framework import status
 
 # Create your views here.
