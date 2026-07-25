@@ -26,12 +26,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-me!rkf34k+lkf35&6azr6f)z71qcur&u@k=2yy)$y-)n#tz%4('
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False 
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1,my-digital-vocabulary-a0fc9931d037.herokuapp.com').split(',')
+ALLOWED_HOSTS = ["*"] #Because I use Heroku
 
 
 # Application definition
@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'profiles',
+    'vocabularies',
+    'exercises',
 
     'rest_framework',
     'rest_framework_simplejwt',
@@ -138,10 +140,22 @@ AUTH_USER_MODEL = 'profiles.CustomUser' #this tells django to use our custom use
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework_simplejwt.authentication.JWTAuthentication',),
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
+
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+
 }
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(days=30),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=35),
 }
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Digital Vocabulary API',
+    'DESCRIPTION': 'Provide the infrastucture for users to create and practise their own vocabularies.',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+}
+
+CSRF_COOKIE_SECURE = True 
+SESSION_COOKIE_SECURE = True
