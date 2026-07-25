@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework import permissions
 from rest_framework.generics import ListAPIView
 from profiles.models import Profile, FollowRelation
+from drf_spectacular.utils import extend_schema
 
 from django.shortcuts import get_object_or_404
 from rest_framework import status
@@ -12,12 +13,16 @@ from rest_framework import status
 class RegisterView(APIView):
     permission_classes = [permissions.AllowAny] # allow any user to access this view without authentication
 
+    @extend_schema(
+        request=RegisterSerializer,
+        responses={201: UserSerializer},
+    )
     def post(self, request):
         serializer = RegisterSerializer(data=request.data)
         serializer.is_valid(raise_exception=True) # validate the data and raise an exception if invalid
         user = serializer.save() # save the validated data to the database
         user_serializer = UserSerializer(user)
-        return Response(user_serializer.data)
+        return Response(user_serializer.data, status=status.HTTP_201_CREATED)
 
 class ProfileSearchView(ListAPIView):
     serializer_class = ProfileSerializer
