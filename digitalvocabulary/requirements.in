@@ -5,3 +5,4 @@ python-dotenv
 djangorestframework-simplejwt
 drf-spectacular
 gunicorn
+dj-database-url
