@@ -21,7 +21,7 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+   # path('admin/', admin.site.urls),
     path('api/profiles/', include('profiles.urls')), # include the urls from the profiles app, update profiles
     path('api/vocabularies/', include('vocabularies.urls')), # include the urls from the vocabularies app, update vocabularies
     path('api/exercises/', include('exercises.urls')), # include urls from exercises app
