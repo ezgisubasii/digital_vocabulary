@@ -31,7 +31,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False 
 
-ALLOWED_HOSTS = ["*"] #Because I use Heroku
+ALLOWED_HOSTS = ["*"] #Because I use Render
 
 
 # Application definition
@@ -56,6 +56,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -92,7 +93,8 @@ import dj_database_url
 DATABASES = {
     'default': dj_database_url.config(
         default='postgresql://user:password@localhost:5432/digitalvocabulary',
-        conn_max_age=600
+        conn_max_age=600,
+        conn_health_checks=True #Neon suspends idle databases, so stale connections are checked before reuse
     )
 }
 
@@ -132,6 +134,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles' #collectstatic gathers all static files here, whitenoise serves them
 
 AUTH_USER_MODEL = 'profiles.CustomUser' #this tells django to use our custom user model instead of the default one.
 
@@ -155,5 +158,7 @@ SPECTACULAR_SETTINGS = {
     'SERVE_INCLUDE_SCHEMA': False,
 }
 
-CSRF_COOKIE_SECURE = True 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https') #Render terminates HTTPS at its proxy
+
+CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
