@@ -108,14 +108,9 @@ python manage.py runserver
 
 The project includes OpenAPI schema documentation.
 
-> You can test the live API directly here: https://my-digital-vocabulary-a0fc9931d037.herokuapp.com/api/schema/swagger-ui/
-
 - Swagger UI: `/api/schema/swagger-ui/`
 - Raw schema: `/api/schema/`
 
-## Deployment
-
-This project is configured for deployment with Heroku using the included Procfile.
 
 ## Notes
 
