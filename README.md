@@ -2,6 +2,15 @@
 
 Digital Vocabulary is a Django REST API project that allows users to create their own vocabulary lists, manage words, follow other users, and practice word meanings through quiz-style questions.
 
+## Live Demo
+
+The API is deployed on Render and uses a PostgreSQL database hosted on Neon.
+
+- Swagger UI → https://digital-vocabulary.onrender.com/api/schema/swagger-ui/
+- Admin panel → https://digital-vocabulary.onrender.com/admin/
+
+> The service runs on Render's free plan. After a period of inactivity the first request may take 30 to 50 seconds while the server wakes up.
+
 ## Features
 
 - User registration and authentication with JWT
@@ -20,8 +29,10 @@ Digital Vocabulary is a Django REST API project that allows users to create thei
 - Django REST Framework
 - Simple JWT
 - DRF Spectacular
-- PostgreSQL
+- PostgreSQL (Neon)
 - Gunicorn
+- WhiteNoise
+- Render
 
 ## Project Structure
 
@@ -32,7 +43,7 @@ Digital Vocabulary is a Django REST API project that allows users to create thei
 
 ## Requirements
 
-Install the dependencies with:
+Install the dependencies with the following command.
 
 ```bash
 pip install -r requirements.txt
@@ -44,7 +55,7 @@ pip install -r requirements.txt
 2. Navigate to the project folder
 3. Create and activate a virtual environment
 
-On Windows:
+On Windows
 
 ```bash
 python -m venv myenv
@@ -57,7 +68,7 @@ myenv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-5. Create a `.env` file with the required environment variables:
+5. Create a `.env` file with the required environment variables
 
 ```env
 SECRET_KEY=your-secret-key
@@ -76,6 +87,16 @@ python manage.py migrate
 ```bash
 python manage.py runserver
 ```
+
+## Deployment
+
+The project runs on Render as a web service and connects to a PostgreSQL database on Neon.
+
+- Build command → `./build.sh`
+- Start command → `cd digitalvocabulary && gunicorn digitalvocabulary.wsgi`
+- Environment variables → `SECRET_KEY` and `DATABASE_URL`
+
+`build.sh` installs the dependencies, collects the static files and applies the database migrations on every deploy. Every push to the `master` branch starts a new deploy automatically.
 
 ## API Endpoints
 
@@ -108,8 +129,8 @@ python manage.py runserver
 
 The project includes OpenAPI schema documentation.
 
-- Swagger UI: `/api/schema/swagger-ui/`
-- Raw schema: `/api/schema/`
+- Swagger UI → `/api/schema/swagger-ui/`
+- Raw schema → `/api/schema/`
 
 
 ## Notes
